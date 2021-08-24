@@ -1,25 +1,24 @@
 package pl.library.book;
 
-public class Book {
-    private String name;
-    private String author;
-
-    public Book() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
+public class Book extends Item {
+    Book(String name, String publisher, String author) {
+        super(name, publisher);
         this.author = author;
+    }
+
+    private String author;
+    private int year;
+
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void borrow(){
+        this.borrowed = true;
+    }
+
+    public boolean isborrowed() {
+        return borrowed;
     }
 }
