@@ -8,13 +8,13 @@ public class Administrator extends User{
         super(login, password, name, surname, profile);
     }
 
-    public void add_book(Book book) throws IOException {
-        Books_list open_list = new Books_list();
+    public void add_book(Book book)  {
+        Books_list open_list = new Books_list("Books.txt");
         open_list.write_book(book);
     }
 
-    public void delete_book(Book book) throws IOException {
-        Books_list open_list = new Books_list();
+    public void delete_book(Book book) {
+        Books_list open_list = new Books_list("Books.txt");
         ArrayList<Book> books_list = open_list.read_books();
         if (books_list.contains(book)){
             books_list.remove(book);
@@ -25,10 +25,10 @@ public class Administrator extends User{
         }
     }
 
-    public void borrow_book(String name, String author, String login) throws IOException {
+    public void borrow_book(String name, String author, String login) {
 
         //updating list of books
-        Books_list open_list2 = new Books_list();
+        Books_list open_list2 = new Books_list("Books.txt");
         ArrayList<Book> new_list2 = open_list2.read_books();
         Book temporary2 = null;
         for (Book one_book: new_list2) {
@@ -56,10 +56,10 @@ public class Administrator extends User{
         new_list.add(temporary);
         }
 
-    public void return_book(String name, String author, String login) throws IOException {
+    public void return_book(String name, String author, String login) {
 
         //updating list of books
-        Books_list open_list2 = new Books_list();
+        Books_list open_list2 = new Books_list("Books.txt");
         ArrayList<Book> new_list2 = open_list2.read_books();
         Book temporary2 = null;
         for (Book one_book: new_list2) {
@@ -86,8 +86,9 @@ public class Administrator extends User{
         temporary.delete_book_from_list(temporary2);
         new_list.add(temporary);
     }
-    public void show_books() throws IOException {
-        Books_list open_list = new Books_list();
+
+    public void show_books() {
+        Books_list open_list = new Books_list("Books.txt");
         ArrayList<Book> new_list = open_list.read_books();
         for (Book book: new_list) {
             System.out.println(book.toString());

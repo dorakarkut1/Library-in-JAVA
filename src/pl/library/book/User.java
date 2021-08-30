@@ -32,7 +32,7 @@ public class User {
     }
 
     public void look_for_book(String name, String author) throws IOException {
-        Books_list open_list = new Books_list();
+        Books_list open_list = new Books_list("Books_example.txt");
         ArrayList<Book> list_of_books = open_list.read_books();
         for(Book book: list_of_books){
             if ((book.getName().equals(name)) & (book.getAuthor().equals(author))){

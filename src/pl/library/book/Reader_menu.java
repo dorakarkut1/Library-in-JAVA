@@ -9,7 +9,7 @@ public class Reader_menu {
         this.login = login;
     }
     String login;
-    public void reader_main(String[] args) throws IOException{
+    public void reader_main(String[] args) throws IOException, ClassNotFoundException {
         User_list open_list = new User_list();
         ArrayList<Reader> new_list = open_list.read_readers();
         Reader reader = open_list.look_for_reader(this.login);
@@ -34,7 +34,7 @@ public class Reader_menu {
                 String name = input2.nextLine();
                 System.out.println("Author: ");
                 String author = input2.nextLine();
-                Books_list open_list2 = new Books_list();
+                Books_list open_list2 = new Books_list("Books_example.txt");
                 System.out.println(open_list2.look_for_book(name,author));
 
         }
