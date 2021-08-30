@@ -1,6 +1,8 @@
 package pl.library.book;
 
-abstract public class Item {
+import java.io.Serializable;
+
+abstract public class Item implements Serializable {
     Item(String name, String publisher){
         this.name = name;
         this.publisher = publisher;
@@ -9,4 +11,13 @@ abstract public class Item {
     private String name;
     private String publisher;
     boolean borrowed;
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", borrowed=" + borrowed +
+                '}';
+    }
 }
