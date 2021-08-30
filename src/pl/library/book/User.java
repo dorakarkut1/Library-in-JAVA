@@ -1,7 +1,5 @@
 package pl.library.book;
 
-import javafx.scene.SnapshotParameters;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,11 +31,11 @@ public class User {
         this.surname = input.nextLine();
     }
 
-    public void look_for_book(String name, String author) throws IOException, ClassNotFoundException {
+    public void look_for_book(String name, String author) throws IOException {
         Books_list open_list = new Books_list();
-        ArrayList<Book> list_of_books = open_list.readBooks();
+        ArrayList<Book> list_of_books = open_list.read_books();
         for(Book book: list_of_books){
-            if ((book.getName() == name) & (book.getAuthor() == author)){
+            if ((book.getName().equals(name)) & (book.getAuthor().equals(author))){
                 System.out.print("Book title: " + name + "\nBook author: " + author +"\nBook is borrowed: "+ book.isborrowed());
             }
             else{
