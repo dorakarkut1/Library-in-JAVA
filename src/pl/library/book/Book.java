@@ -13,6 +13,10 @@ public class Book extends Item implements Serializable {
     private String author;
     private int year;
 
+    public String getAuthor() {
+        return author;
+    }
+
     public void borrow(){
         this.borrowed = true;
     }

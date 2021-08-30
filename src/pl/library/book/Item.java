@@ -12,6 +12,10 @@ abstract public class Item implements Serializable {
     private String publisher;
     boolean borrowed;
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Item{" +

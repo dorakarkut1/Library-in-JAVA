@@ -8,16 +8,26 @@ public class Books_list {
     static ObjectOutputStream os;
     static ObjectInputStream is;
 
-    public void readBooks() throws ClassNotFoundException, IOException {
-        is = new ObjectInputStream(new FileInputStream(file_path));
-        ArrayList<Book> input = (ArrayList<Book>) is.readObject();
-        System.out.println(input);
-        is.close();
+    public ArrayList<Book> readBooks() throws ClassNotFoundException, IOException {
+        try {
+            is = new ObjectInputStream(new FileInputStream(file_path));
+            ArrayList<Book> input = (ArrayList<Book>) is.readObject();
+            is.close();
+            return input;
+        }
+        catch (FileNotFoundException e){
+            ArrayList<Book> nowa = new ArrayList<>();
+            return nowa;
+        }
+
     }
 
-    public void writeBook(ArrayList<Book> books) throws IOException {
+    public void writeBook(Book book) throws IOException, ClassNotFoundException {
+        ArrayList<Book> temporary = readBooks();
+        temporary.add(book);
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file_path));
-        os.writeObject(books);
+        os.writeObject(temporary);
         os.close();
     }
+
 }
