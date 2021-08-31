@@ -1,14 +1,19 @@
 package pl.library.book;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class Books_listTest {
+class BooksListTest {
     BooksList example;
     Book book1, book2;
 
@@ -24,13 +29,13 @@ class Books_listTest {
     }
 
     @Test
-    void read_books() throws IOException, ClassNotFoundException {
+    void readBooks() throws IOException, ClassNotFoundException {
         Book result = example.lookForBook(book1.getName(), book1.getAuthor());
         assertEquals(book1.toString(), result.toString());
     }
 
     @Test
-    void write_book() throws IOException, ClassNotFoundException {
+    void writeBook() throws IOException, ClassNotFoundException {
         Book book3 = new Book("Two", "One", "Three", 1989);
         ArrayList<Book> temporary2 = new ArrayList<>();
         temporary2.add(book3);
@@ -40,7 +45,7 @@ class Books_listTest {
     }
 
     @Test
-    void look_for_book() throws IOException, ClassNotFoundException {
+    void lookForBook() throws IOException, ClassNotFoundException {
         Book result = example.lookForBook(book2.getName(), book2.getAuthor());
         assertEquals(book2.toString(), result.toString());
     }
@@ -49,5 +54,37 @@ class Books_listTest {
     void delete_example(){
         File f = new File("Books_example.txt");
         f.delete();
+    }
+
+    @Test
+    void deleteBook() throws IOException, ClassNotFoundException {
+        example.deleteBook(book2);
+        assertNull(example.lookForBook("Three", "One"));
+    }
+
+    @Test
+    void borrowBook() {
+
+    }
+
+    @Test
+    void returnBook() {
+    }
+
+    @Test
+    void showBooks() {
+        example.showBooks();
+    }
+
+    @Test
+    void rewriteBook() throws IOException, ClassNotFoundException {
+        book1 = new Book("Five", "Two", "Three", 1999);
+        book2 = new Book("Three", "Two", "One", 1989);
+        ArrayList<Book> temporary = new ArrayList<>();
+        temporary.add(book1);
+        temporary.add(book2);
+        example.rewriteBook(temporary);
+        Book result = example.lookForBook(book1.getName(), book1.getAuthor());
+        assertEquals(book1.toString(), result.toString());
     }
 }

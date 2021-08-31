@@ -22,18 +22,18 @@ class BookTest {
     @Test
     void borrow() {
         example.borrow();
-        assertTrue(example.isborrowed());
+        assertTrue(example.isBorrowed());
     }
 
     @Test
     void return_book() {
         example.borrow();
-        example.return_book();
+        example.returnBook();
         assertFalse(example.borrowed);
     }
 
     @Test
-    void isborrowed() {
-        assertFalse(example.isborrowed());
+    void isBorrowed() {
+        assertFalse(example.isBorrowed());
     }
 }
