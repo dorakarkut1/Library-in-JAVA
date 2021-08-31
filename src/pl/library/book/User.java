@@ -1,10 +1,11 @@
 package pl.library.book;
 
-import java.io.IOException;
-import java.util.ArrayList;
+
+import java.io.Serializable;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class User {
+public class User implements Serializable {
     User(String login, String password, String name, String surname, String profile ){
         this.login = login;
         this.password = password;
@@ -18,7 +19,7 @@ public class User {
     protected String surname;
     protected String profile;
 
-    public void change_info(){
+    public void changeInfo(){
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter your information: \n");
         System.out.print("Login: \n");
@@ -31,27 +32,54 @@ public class User {
         this.surname = input.nextLine();
     }
 
-    public void look_for_book(String name, String author) throws IOException {
-        Books_list open_list = new Books_list("Books_example.txt");
-        ArrayList<Book> list_of_books = open_list.read_books();
-        for(Book book: list_of_books){
-            if ((book.getName().equals(name)) & (book.getAuthor().equals(author))){
-                System.out.print("Book title: " + name + "\nBook author: " + author +"\nBook is borrowed: "+ book.isborrowed());
-            }
-            else{
-                System.out.println("Book not found");
-            }
+    public boolean ifAdministrator(){
+        if (this.profile.equals("reader")){
+            return false;
+        }
+        else {
+            return true;
         }
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        User user = (User) o;
+        return login.equals(user.login) && password.equals(user.password) && name.equals(user.name) && surname.equals(user.surname) && profile.equals(user.profile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password, name, surname, profile);
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", profile='" + profile + '\'' +
-                '}';
+        return "Login: " + login + '\n' +
+                "password: " + password + '\n' +
+                "name: " + name + '\n' +
+                "surname: " + surname + '\n' +
+                "profile: " + profile + '\n';
     }
 }
 

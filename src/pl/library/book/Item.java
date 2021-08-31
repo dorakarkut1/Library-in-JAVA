@@ -1,6 +1,7 @@
 package pl.library.book;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 abstract public class Item implements Serializable {
     Item(String name, String publisher){
@@ -14,6 +15,26 @@ abstract public class Item implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public boolean isBorrowed() {
+        return borrowed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        Item item = (Item) o;
+        return borrowed == item.borrowed && name.equals(item.name) && publisher.equals(item.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, publisher, borrowed);
     }
 
     @Override

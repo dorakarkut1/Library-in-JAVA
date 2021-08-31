@@ -1,6 +1,7 @@
 package pl.library.book;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Book extends Item implements Serializable {
     Book(String name, String publisher, String author, int year) {
@@ -23,17 +24,30 @@ public class Book extends Item implements Serializable {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "author='" + author + '\'' +
-                ", year=" + year +
-                "} " + super.toString();
+        return "Book named: " + this.getName() + '\n' +
+                "- author: " + author + '\n' +
+                "- publisher: " + this.getPublisher() + '\n' +
+                "- year: " + year + '\n' +
+                "- borrowed: " + this.borrowed;
     }
 
-    public void return_book(){
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        Book book = (Book) o;
+        return year == book.year && author.equals(book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), author, year);
+    }
+
+    public void returnBook(){
         this.borrowed = false;
     }
 
-    public boolean isborrowed() { return borrowed; }
+    public boolean isBorrowed() { return borrowed; }
 }
 
 
