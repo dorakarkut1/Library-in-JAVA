@@ -39,10 +39,8 @@ abstract public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "name='" + name + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", borrowed=" + borrowed +
-                '}';
+        return "Name: " + name + '\n' +
+                "publisher: " + publisher + '\n' +
+                "borrowed: " + borrowed ;
     }
 }

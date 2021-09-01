@@ -16,12 +16,13 @@ public class Reader extends User implements Serializable {
     }
 
     public void add_Book_to_list(Book book) {
+
         this.book_list.add(book);
     }
 
     public void delete_book_from_list(Book book){
         for (Book one_book: this.book_list){
-            if (one_book == book){
+            if (one_book.equals(book)){
                 book_list.remove(book);
             }
             else{
