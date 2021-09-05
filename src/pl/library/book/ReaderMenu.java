@@ -18,7 +18,6 @@ public class ReaderMenu {
     public String readerMain() {
         String decision = "0";
         while (true) {
-            System.out.println("Enter your decision: \n");
             System.out.print("1. Check your borrowed books \n" +
                     "2. Change your information and password \n" +
                     "3. Look for a book\n");
@@ -30,8 +29,6 @@ public class ReaderMenu {
             }
         }
     }
-
-
 
     public void menu() throws IOException, ClassNotFoundException {
         String decision = this.readerMain();
