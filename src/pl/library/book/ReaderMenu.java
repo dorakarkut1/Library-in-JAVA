@@ -20,40 +20,47 @@ public class ReaderMenu {
         while (true) {
             System.out.print("1. Check your borrowed books \n" +
                     "2. Change your information and password \n" +
-                    "3. Look for a book\n");
+                    "3. Look for a book" +
+                    "0. Exit\n");
             System.out.println("Enter your decision: \n");
             Scanner input = new Scanner(System.in);
             decision = input.nextLine();
-            if (decision.equals("1") || decision.equals("2") || decision.equals("3")){
+            if (decision.equals("1") || decision.equals("2") || decision.equals("3")|| decision.equals("0")){
                 return decision;
             }
         }
     }
 
     public void menu() throws IOException, ClassNotFoundException {
-        String decision = this.readerMain();
         UserList open_list = new UserList(user_file_path);
-        ArrayList<Reader> new_list = open_list.readReaders();
         Reader reader = open_list.lookForReader(this.login);
-        switch (decision) {
-            case "1":
-                System.out.println(reader.getBook_list());
-                break;
-            case "2":
-                new_list.remove(reader);
-                reader.changeInfo();
-                new_list.add(reader);
-                open_list.writeReader(new_list);
-                break;
-            case "3":
-                Scanner input2 = new Scanner(System.in);
-                System.out.println("Title: ");
-                String name = input2.nextLine();
-                System.out.println("Author: ");
-                String author = input2.nextLine();
-                BooksList open_list2 = new BooksList("Books_example.txt");
-                System.out.println(open_list2.lookForBook(name, author));
-                break;
+        String decision = "1";
+        while (decision != "0") {
+            decision = this.readerMain();
+            switch (decision) {
+                case "1":
+                    System.out.println(reader.getBook_list());
+                    break;
+                case "2":
+                    open_list.deleteReader(this.login);
+                    reader.changeInfo();
+                    ArrayList<Reader> new_list = new ArrayList<>();
+                    new_list.add(reader);
+                    open_list.writeReader(new_list);
+                    break;
+                case "3":
+                    Scanner input2 = new Scanner(System.in);
+                    System.out.println("Title: ");
+                    String name = input2.nextLine();
+                    System.out.println("Author: ");
+                    String author = input2.nextLine();
+                    BooksList open_list2 = new BooksList("Books_example.txt");
+                    System.out.println(open_list2.lookForBook(name, author));
+                    break;
+                case "0":
+                    decision = "0";
+                    break;
+            }
         }
     }
 }

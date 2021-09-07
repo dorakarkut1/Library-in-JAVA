@@ -2,6 +2,7 @@ package pl.library.book;
 
 import pl.library.book.UserList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -21,8 +22,9 @@ public class LoginMenu {
             }
         }
     }
-    public void menu(){
+    public void menu() throws IOException, ClassNotFoundException {
         String file_path = "User.txt";
+        String book_file_path = "Book.txt";
         String decision = loginMain();
         UserList open_list = new UserList(file_path);
         ArrayList<Reader> user_list = open_list.readReaders();
@@ -37,7 +39,14 @@ public class LoginMenu {
                 String password = input.nextLine();
                 Reader checkingInfo = open_list.lookForReader(login);
                 if (checkingInfo.getPassword().equals(password)){
-                    ReaderMenu menu = new ReaderMenu(login, file_path);
+                    if (checkingInfo.getProfile().equals("reader")) {
+                        ReaderMenu menu = new ReaderMenu(login, file_path);
+                        menu.menu();
+                    }
+                    else{
+                        AdministratorMenu menu2 = new AdministratorMenu(login, file_path, book_file_path);
+                        menu2.menu();
+                    }
                 }
                 else{
                     System.out.println("Incorrect login or password.\n");
@@ -62,7 +71,14 @@ public class LoginMenu {
                 open_list.writeReader(user_list);
                 System.out.println("Created new account");
                 System.out.println(new_user);
-                ReaderMenu menu = new ReaderMenu(login2, file_path);
+                if (profile2.equals("reader")) {
+                    ReaderMenu menu = new ReaderMenu(login2, file_path);
+                    menu.menu();
+                }
+                else{
+                    AdministratorMenu menu2 = new AdministratorMenu(login2, file_path, book_file_path);
+                    menu2.menu();
+                }
                 break;
         }
     }
