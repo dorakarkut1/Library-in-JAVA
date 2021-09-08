@@ -8,19 +8,21 @@ import java.util.Scanner;
 
 public class ReaderMenu {
 
-    ReaderMenu(String login, String user_file_path)  {
+    ReaderMenu(String login, String user_file_path, String books_file_path)  {
         this.login = login;
         this.user_file_path = user_file_path;
+        this.books_file_path = books_file_path;
     }
     String login;
     String user_file_path;
+    String books_file_path;
 
     public String readerMain() {
         String decision = "0";
         while (true) {
             System.out.print("1. Check your borrowed books \n" +
                     "2. Change your information and password \n" +
-                    "3. Look for a book" +
+                    "3. Look for a book\n" +
                     "0. Exit\n");
             System.out.println("Enter your decision: \n");
             Scanner input = new Scanner(System.in);
@@ -54,7 +56,7 @@ public class ReaderMenu {
                     String name = input2.nextLine();
                     System.out.println("Author: ");
                     String author = input2.nextLine();
-                    BooksList open_list2 = new BooksList("Books_example.txt");
+                    BooksList open_list2 = new BooksList(books_file_path);
                     System.out.println(open_list2.lookForBook(name, author));
                     break;
                 case "0":

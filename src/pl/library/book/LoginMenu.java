@@ -38,9 +38,17 @@ public class LoginMenu {
                 System.out.println("Password: \n");
                 String password = input.nextLine();
                 Reader checkingInfo = open_list.lookForReader(login);
+                try {
+                    String temp = checkingInfo.getPassword();
+                }
+                catch (NullPointerException n){
+                    System.out.println("There is no such user or the entered data is incorrect");
+                    menu();
+                    break;
+                }
                 if (checkingInfo.getPassword().equals(password)){
                     if (checkingInfo.getProfile().equals("reader")) {
-                        ReaderMenu menu = new ReaderMenu(login, file_path);
+                        ReaderMenu menu = new ReaderMenu(login, file_path, book_file_path);
                         menu.menu();
                     }
                     else{
@@ -72,7 +80,7 @@ public class LoginMenu {
                 System.out.println("Created new account");
                 System.out.println(new_user);
                 if (profile2.equals("reader")) {
-                    ReaderMenu menu = new ReaderMenu(login2, file_path);
+                    ReaderMenu menu = new ReaderMenu(login2, file_path, book_file_path);
                     menu.menu();
                 }
                 else{

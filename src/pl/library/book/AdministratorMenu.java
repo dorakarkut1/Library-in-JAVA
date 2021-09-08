@@ -23,11 +23,13 @@ public class AdministratorMenu {
                     "4. Books list \n" +
                     "5. Change your information \n" +
                     "6. Delete an account\n" +
+                    "7. Borrow a book\n" +
+                    "8. Return a book\n" +
                     "0. Exit\n");
             System.out.println("Enter your decision: \n");
             Scanner input = new Scanner(System.in);
             decision = input.nextLine();
-            if (decision.equals("1") || decision.equals("2") || decision.equals("3") || decision.equals("4") || decision.equals("5") || decision.equals("6") || decision.equals("0")){
+            if (decision.equals("1") || decision.equals("2") || decision.equals("3") || decision.equals("4") || decision.equals("5") || decision.equals("6") || decision.equals("7") || decision.equals("8") || decision.equals("0")){
                 return decision;
             }
         }
@@ -85,6 +87,44 @@ public class AdministratorMenu {
                     System.out.println("Enter users login you want to delete");
                     String login_temp = input3.nextLine();
                     open_list.deleteReader(login_temp);
+                    break;
+                case "7":
+                    Scanner input4 = new Scanner(System.in);
+                    System.out.println("Enter readers login: \n");
+                    System.out.println("Login: \n");
+                    String login = input4.nextLine();
+                    System.out.println("Enter name and author of the book: \n");
+                    System.out.println("Name: \n");
+                    String name = input4.nextLine();
+                    System.out.println("Author: \n");
+                    String author3 = input4.nextLine();
+                    try{
+                        open_book_list.borrowBook(name, author3, login, this.user_file_path);
+                    }
+                    catch (NullPointerException n){
+                        System.out.println("Given information are incorrect or there is no such book in library");
+                        menu();
+                        break;
+                    }
+                    break;
+                case "8":
+                    Scanner input5 = new Scanner(System.in);
+                    System.out.println("Enter readers login: \n");
+                    System.out.println("Login: \n");
+                    String login2 = input5.nextLine();
+                    System.out.println("Enter name and author of the book: \n");
+                    System.out.println("Name: \n");
+                    String name2 = input5.nextLine();
+                    System.out.println("Author: \n");
+                    String author4 = input5.nextLine();
+                    try{
+                        open_book_list.returnBook(name2, author4, login2, this.user_file_path);
+                    }
+                    catch (NullPointerException n){
+                        System.out.println("Given information are incorrect or there is no such book in library");
+                        menu();
+                        break;
+                    }
                     break;
                 case "0":
                     decision = "0";

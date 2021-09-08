@@ -21,13 +21,8 @@ public class Reader extends User implements Serializable {
     }
 
     public void delete_book_from_list(Book book){
-        for (Book one_book: this.book_list){
-            if (one_book.equals(book)){
-                book_list.remove(book);
-            }
-            else{
-                System.out.println("Book was not borrowed by this reader.");
-            }
+        if (!this.book_list.remove(book)){
+            System.out.println("Book was not borrowed by this reader.");
         }
     }
 

@@ -79,10 +79,10 @@ public class BooksList {
         }
         this.rewriteBook(books_list);
     }
-    public void borrowBook(String name, String author, String login, String user_file_path) throws IOException, ClassNotFoundException {
+    public void borrowBook(String name, String author, String login, String user_file_path) {
 
         //updating list of books
-        ArrayList<Book> books_list = (ArrayList<Book>) is.readObject();
+        ArrayList<Book> books_list = this.readBooks();
         Book temporary2 = null;
         for (Book one_book: books_list) {
             if ((one_book.getName().equals(name)) & (one_book.getAuthor().equals(author))) {
